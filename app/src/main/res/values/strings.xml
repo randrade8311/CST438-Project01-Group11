@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">CST438-Project01-Group11</string>
+    <string name="pokedex">Pokedex</string>
+    <string name="team">Team</string>
+    <string name="random">Random</string>
+    <string name="search_pokemon">Search Pokemon</string>
 </resources>

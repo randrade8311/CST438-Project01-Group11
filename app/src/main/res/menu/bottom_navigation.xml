@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/pokedex_navigation"
+        android:icon="@drawable/pokedex_icon"
+        android:title="@string/pokedex"
+        android:iconTint="?attr/strokeColor"/>
+
+    <item
+        android:id="@+id/poketeam_navigation"
+        android:icon="@drawable/pokemon_team_icon"
+        android:title="@string/team"
+        android:iconTint="?attr/strokeColor"/>
+
+    <item
+        android:id="@+id/random_pokemon_navigation"
+        android:icon="@drawable/random_pokemon_icon"
+        android:title="@string/random"
+        android:iconTint="?attr/strokeColor"/>
+
+
+</menu>
