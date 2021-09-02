@@ -26,13 +26,12 @@ public class PokedexFragment extends Fragment {
     public View onCreateView(@NonNull @org.jetbrains.annotations.NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.pokedex_layout, container, false);
 
-        ArrayList<Pokemon> pokemonList = generatePokemonList();
+        ArrayList<Pokemon> pokemonList = getPokemonList();
         generateRecyclerView(view, pokemonList);
-
         return view;
     }
 
-    private ArrayList<Pokemon> generatePokemonList() {
+    private ArrayList<Pokemon> getPokemonList() {
         ArrayList<Pokemon> list = new ArrayList<>();
         for(int i=0; i<50; i++) {
             list.add(new Pokemon(i, R.drawable.broken_image, "Pokemon "+i));

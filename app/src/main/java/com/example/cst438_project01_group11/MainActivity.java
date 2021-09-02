@@ -1,12 +1,6 @@
 package com.example.cst438_project01_group11;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.view.Window;
-
-import com.example.cst438_project01_group11.models.Pokemon;
-import com.example.cst438_project01_group11.models.PokemonRes;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -32,13 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mBottomNavigationView = findViewById(R.id.bottom_navigation);
-        getSupportFragmentManager()
-            .beginTransaction()
-            .replace(R.id.fragment_container, new PokedexFragment())
-            .commit();
-
-        setBottomNavigationListener();
+        initBottomNavigationView();
 
 //        retrofit = new Retrofit.Builder()
 //                .baseUrl("http://pokeapi.co/api/v2/")
@@ -46,6 +34,17 @@ public class MainActivity extends AppCompatActivity {
 //                .build();
         obtenerDatos();
     }
+
+    private void initBottomNavigationView() {
+        mBottomNavigationView = findViewById(R.id.bottom_navigation);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, new PokedexFragment())
+                .commit();
+
+        setBottomNavigationListener();
+    }
+
     private void obtenerDatos(){
 //        PokeapiService service =retrofit.create(PokeapiService.class);
 //        Call<PokemonRes> pokemonResCall = service.obtenerListaPokemon();

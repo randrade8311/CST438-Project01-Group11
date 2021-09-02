@@ -19,6 +19,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:menu="@menu/bottom_navigation"
-        android:background="?attr/cardBackgroundColor"/>
+        android:background="?attr/colorOnPrimary"/>
 
 </RelativeLayout>
