@@ -1,14 +1,16 @@
 package com.example.cst438_project01_group11;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import android.os.Bundle;
-import android.view.MenuItem;
-
+import com.example.cst438_project01_group11.HomePageFragments.PokedexFragment;
+import com.example.cst438_project01_group11.HomePageFragments.RandomPokemonFragment;
+import com.example.cst438_project01_group11.HomePageFragments.TeamFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 
 import org.jetbrains.annotations.NotNull;
 
