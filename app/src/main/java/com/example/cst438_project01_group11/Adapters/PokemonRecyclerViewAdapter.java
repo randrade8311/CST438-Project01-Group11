@@ -15,6 +15,7 @@ import com.example.cst438_project01_group11.R;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PokemonRecyclerViewAdapter extends RecyclerView.Adapter<PokemonRecyclerViewAdapter.PokemonViewHolder> {
 
@@ -53,5 +54,10 @@ public class PokemonRecyclerViewAdapter extends RecyclerView.Adapter<PokemonRecy
     @Override
     public int getItemCount() {
         return mPokemonList.size();
+    }
+
+    public void filterList(ArrayList<Pokemon> filteredPokemons) {
+        mPokemonList = filteredPokemons;
+        notifyDataSetChanged();
     }
 }
