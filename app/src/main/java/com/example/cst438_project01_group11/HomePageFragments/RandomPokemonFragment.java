@@ -45,8 +45,8 @@ public class RandomPokemonFragment extends Fragment {
     }
 
     private void findViews(View view) {
-        mPokemonImage = view.findViewById(R.id.random_pokemon_image);
-        mPokemonName = view.findViewById(R.id.random_pokemon_name);
+        mPokemonImage = view.findViewById(R.id.pokemon_image);
+        mPokemonName = view.findViewById(R.id.pokemon_name);
         mCardType1 = view.findViewById(R.id.pokemon_type_1_card);
         mType1 = view.findViewById(R.id.pokemon_type_1_text);
         mCardType2 = view.findViewById(R.id.pokemon_type_2_card);
