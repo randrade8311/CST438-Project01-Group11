@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name" tools:ignore="Typos">CST438-Project01-Group11</string>
+    <string name="app_name" tools:ignore="Typos">Pokedex</string>
     <string name="pokedex">Pokedex</string>
     <string name="team">Team</string>
     <string name="random">Random</string>
