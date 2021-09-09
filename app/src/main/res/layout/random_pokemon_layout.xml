@@ -43,8 +43,9 @@
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:layout_margin="15dp"
-            app:cardElevation="8dp"
-            app:cardCornerRadius="12dp">
+            app:cardBackgroundColor="?attr/cardBackgroundColor"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="8dp">
 
             <TextView
                 android:id="@+id/pokemon_type_1_text"
@@ -61,8 +62,9 @@
             android:layout_height="match_parent"
             android:layout_margin="15dp"
             android:visibility="visible"
-            app:cardElevation="8dp"
-            app:cardCornerRadius="12dp">
+            app:cardBackgroundColor="?attr/cardBackgroundColor"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="8dp">
 
             <TextView
                 android:id="@+id/pokemon_type_2_text"
@@ -78,28 +80,29 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.7"
-        android:gravity="center">
+        app:layout_constraintVertical_bias="0.7">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/pokemon_evolution_card_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            app:cardElevation="8dp"
-            app:cardCornerRadius="12dp">
+            app:cardBackgroundColor="?attr/cardBackgroundColor"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="8dp">
 
             <ImageView
                 android:id="@+id/pokemon_evolution_1"
                 android:layout_width="130dp"
                 android:layout_height="130dp"
+                android:contentDescription="@string/pokemon_name"
                 android:padding="15dp"
-                android:src="@drawable/pokeball_icon"
-                android:contentDescription="@string/pokemon_name"/>
+                android:src="@drawable/pokeball_icon" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -108,32 +111,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            app:cardElevation="8dp"
+            android:visibility="visible"
+            app:cardBackgroundColor="?attr/cardBackgroundColor"
             app:cardCornerRadius="12dp"
-            android:visibility="visible">
+            app:cardElevation="8dp">
 
             <ImageView
                 android:id="@+id/pokemon_evolution_2"
                 android:layout_width="130dp"
                 android:layout_height="130dp"
+                android:contentDescription="@string/pokemon_name"
                 android:padding="15dp"
-                android:src="@drawable/pokeball_icon"
-                android:contentDescription="@string/pokemon_name"/>
+                android:src="@drawable/pokeball_icon" />
 
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/add_to_team_button"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:text="@string/add_to_team"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.87"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.87" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
