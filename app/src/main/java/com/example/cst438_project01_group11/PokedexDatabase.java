@@ -6,10 +6,11 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {DreamTeam.class}, version = 1, exportSchema = false)
+@Database(entities = {DreamTeam.class, User.class}, version = 2, exportSchema = false)
 public abstract class PokedexDatabase extends RoomDatabase {
     private static PokedexDatabase sInstance;
-//    public abstract DreamTeamDao dreamTeam();
+    public abstract DreamTeamDao dreamTeam();
+    public abstract UserDao user();
 
     public static synchronized PokedexDatabase getInstance(Context context){
         if (sInstance == null){
