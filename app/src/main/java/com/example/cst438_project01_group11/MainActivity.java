@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
        PokiapiService service = retrofit.create(PokiapiService.class);
        Call<PokemonRes> pokemonResCall = service.obtenerListaPokemon();
 
-       pokemonResCall.enqueue(new Callback<PokemonRes>()){
+//       pokemonResCall.enqueue(new Callback<PokemonRes>()){
 //           @Override
 //           public void onResponse(Call<PokemonRes> call, Response<PokemonRes> response) {
 //               if (response.isSuccessful()){
