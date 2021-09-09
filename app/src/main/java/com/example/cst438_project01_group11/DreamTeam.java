@@ -39,19 +39,19 @@ public class DreamTeam {
         this.dtId = dtId;
     }
 
-    public String getuUsername() {
+    public String getUUsername() {
         return uUsername;
     }
 
-    public void setuUsername(String uUsername) {
+    public void setUUsername(String uUsername) {
         this.uUsername = uUsername;
     }
 
-    public int getuId() {
+    public int getUId() {
         return uId;
     }
 
-    public void setuId(int uId) {
+    public void setUId(int uId) {
         this.uId = uId;
     }
 
