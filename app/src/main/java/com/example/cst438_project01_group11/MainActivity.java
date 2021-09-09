@@ -2,6 +2,7 @@ package com.example.cst438_project01_group11;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +20,8 @@ public class MainActivity extends AppCompatActivity {
 //    private Retrofit retrofit;
     private static final String TAG = "POKIDEX";
 
-    BottomNavigationView mBottomNavigationView;
+    private BottomNavigationView mBottomNavigationView;
+    private int mFragmentId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +38,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initBottomNavigationView() {
+        mFragmentId = R.id.pokedex_navigation;
         mBottomNavigationView = findViewById(R.id.bottom_navigation);
+        Fragment selectedFragment;
+        if(mFragmentId == R.id.pokedex_navigation) {
+            selectedFragment = new PokedexFragment();
+        } else if (mFragmentId == R.id.poketeam_navigation) {
+            selectedFragment = new TeamFragment();
+        } else if (mFragmentId == R.id.random_pokemon_navigation) {
+            selectedFragment = new RandomPokemonFragment();
+        } else {
+            selectedFragment = new PokedexFragment();
+        }
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, new PokedexFragment())
+                .replace(R.id.fragment_container, selectedFragment)
                 .commit();
 
         setBottomNavigationListener();
@@ -79,12 +92,13 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
 
                 Fragment selectedFragment;
+                mFragmentId = item.getItemId();
 
-                if(item.getItemId() == R.id.pokedex_navigation) {
+                if(mFragmentId == R.id.pokedex_navigation) {
                     selectedFragment = new PokedexFragment();
-                } else if ( item.getItemId() == R.id.poketeam_navigation) {
+                } else if (mFragmentId == R.id.poketeam_navigation) {
                     selectedFragment = new TeamFragment();
-                } else if( item.getItemId() == R.id.random_pokemon_navigation) {
+                } else if( mFragmentId == R.id.random_pokemon_navigation) {
                     selectedFragment = new RandomPokemonFragment();
                 } else {
                     return false;
