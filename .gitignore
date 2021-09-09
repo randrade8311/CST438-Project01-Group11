@@ -13,7 +13,8 @@
 .externalNativeBuild
 .cxx
 local.properties
-
+app/build.gradle
+gradle/wrapper/gradle-wrapper.properties
 
 # Created by https://www.toptal.com/developers/gitignore/api/android,androidstudio,java,windows,macos,jetbrains+all
 # Edit at https://www.toptal.com/developers/gitignore?templates=android,androidstudio,java,windows,macos,jetbrains+all
