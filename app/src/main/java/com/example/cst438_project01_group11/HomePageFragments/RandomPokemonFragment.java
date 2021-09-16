@@ -1,5 +1,6 @@
 package com.example.cst438_project01_group11.HomePageFragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.cst438_project01_group11.PokemonTypes;
 import com.example.cst438_project01_group11.R;
 import com.example.cst438_project01_group11.models.Pokemon;
 import com.google.android.material.button.MaterialButton;
@@ -25,9 +27,7 @@ public class RandomPokemonFragment extends Fragment {
 
     private ImageView mPokemonImage;
     private TextView mPokemonName;
-    private MaterialCardView mCardType1;
     private TextView mType1;
-    private MaterialCardView mCardType2;
     private TextView mType2;
     private MaterialCardView mCardEvo1;
     private ImageView mEvo1;
@@ -41,15 +41,26 @@ public class RandomPokemonFragment extends Fragment {
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.random_pokemon_layout, container, false);
         findViews(view);
+        setTypeColors();
+        setPokemonName();
         return view;
+    }
+
+    private void setPokemonName() {
+        mPokemonName.setText("Charizard");
+    }
+
+    private void setTypeColors() {
+        mType1.setText(PokemonTypes.DRAGON.getType());
+        mType1.setBackgroundColor(PokemonTypes.DRAGON.getColor());
+        mType2.setText(PokemonTypes.FIRE.getType());
+        mType2.setBackgroundColor(PokemonTypes.FIRE.getColor());
     }
 
     private void findViews(View view) {
         mPokemonImage = view.findViewById(R.id.pokemon_image);
         mPokemonName = view.findViewById(R.id.pokemon_name);
-        mCardType1 = view.findViewById(R.id.pokemon_type_1_card);
         mType1 = view.findViewById(R.id.pokemon_type_1_text);
-        mCardType2 = view.findViewById(R.id.pokemon_type_2_card);
         mType2 = view.findViewById(R.id.pokemon_type_2_text);
         mCardEvo1 = view.findViewById(R.id.pokemon_evolution_card_1);
         mEvo1 = view.findViewById(R.id.pokemon_evolution_1);

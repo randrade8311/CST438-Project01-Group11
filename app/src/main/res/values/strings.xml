@@ -10,4 +10,5 @@
     <string name="pokemon_not_found">No pokemon found</string>
     <string name="pokemon_type">Pokemon Type</string>
     <string name="add_to_team">Add to Team</string>
+    <string name="remove_from_team">Remove from Team</string>
 </resources>
