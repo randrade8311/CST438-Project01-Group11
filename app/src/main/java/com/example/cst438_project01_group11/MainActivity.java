@@ -1,6 +1,9 @@
 package com.example.cst438_project01_group11;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
+import android.view.Window;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -14,10 +17,23 @@ import com.example.cst438_project01_group11.HomePageFragments.TeamFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.jetbrains.annotations.NotNull;
+import com.android.volley.Response;
+import com.example.cst438_project01_group11.models.Pokemon;
+import com.example.cst438_project01_group11.models.PokemonRes;
+import com.example.cst438_project01_group11.pokiapi.PokiapiService;
+
+import org.chromium.base.Callback;
+import org.chromium.base.Log;
+
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-//    private Retrofit retrofit;
+   private Retrofit retrofit;
     private static final String TAG = "POKIDEX";
 
     private BottomNavigationView mBottomNavigationView;
@@ -34,6 +50,10 @@ public class MainActivity extends AppCompatActivity {
 //                .baseUrl("http://pokeapi.co/api/v2/")
 //                .addConverterFactory(GsonConverterFactory.create())
 //                .build();
+       retrofit = new Retrofit.Builder()
+               .baseUrl("http://pokeapi.co/api/v2/")
+               .addConverterFactory(GsonConverterFactory.create())
+               .build();
         obtenerDatos();
     }
 
@@ -59,29 +79,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void obtenerDatos(){
-//        PokeapiService service =retrofit.create(PokeapiService.class);
-//        Call<PokemonRes> pokemonResCall = service.obtenerListaPokemon();
+       PokiapiService service = retrofit.create(PokiapiService.class);
+       Call<PokemonRes> pokemonResCall = service.obtenerListaPokemon();
+
+//       pokemonResCall.enqueue(new Callback<PokemonRes>()){
+//           @Override
+//           public void onResponse(Call<PokemonRes> call, Response<PokemonRes> response) {
+//               if (response.isSuccessful()){
+//                   PokemonRes pokemonRes = response.body();
+//                   ArrayList<Pokemon> listaPokemon = pokemonRes.getResults();
 //
-//        pokemonResCall.enqueue(new Callback<PokemonRes>()){
-//            @Override
-//            public void onResponse(Call<PokemonRes> call, Response<PokemonRes> response) {
-//                if (response.isSuccessful()){
-//                    PokemonRes pokemonRes = response.body();
-//                    ArrayList<Pokemon> listaPokemon = pokemonRes.getResults();
-//
-//                    for(int i = 0; i < listaPokemon.size(); i++){
-//                        Pokemon p = listaPokemon.get(i);
-//                        Log.i(TAG, " Pokemon: " + p.getName());
-//                    }
-//                } else {
-//                    Log.e(TAG, " onResponse: " + response.errorBody());
-//                }
-//            }
-//            @Override
-//            public void onFailure(Call<PokemonRes> call, Throwable t){
-//                Log.e(TAG, " onFailure: " + t.getMessage())
-//            }
-//        });
+//                   for(int i = 0; i < listaPokemon.size(); i++){
+//                       Pokemon p = listaPokemon.get(i);
+//                       Log.i(TAG, " Pokemon: " + p.getName());
+//                   }
+//               } else {
+//                   Log.e(TAG, " onResponse: " + response.errorBody());
+//               }
+//           }
+//           @Override
+//           public void onFailure(Call<PokemonRes> call, Throwable t){
+//               Log.e(TAG, " onFailure: " + t.getMessage())
+//           }
+//       });
 
 
     }
