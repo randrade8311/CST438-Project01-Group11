@@ -6,8 +6,12 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {DreamTeam.class, User.class}, version = 2, exportSchema = false)
+import com.example.cst438_project01_group11.models.Pokemon;
+
+@Database(entities = {DreamTeam.class, User.class, Pokemon.class}, version = 2, exportSchema = false)
 public abstract class PokedexDatabase extends RoomDatabase {
+    public static final String POKEMON_TABLE = "POKEMON_TABLE";
+
     private static PokedexDatabase sInstance;
     public abstract DreamTeamDao dreamTeam();
     public abstract UserDao user();

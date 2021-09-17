@@ -1,9 +1,7 @@
 package com.example.cst438_project01_group11;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.view.Window;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -14,28 +12,25 @@ import androidx.fragment.app.Fragment;
 import com.example.cst438_project01_group11.HomePageFragments.PokedexFragment;
 import com.example.cst438_project01_group11.HomePageFragments.RandomPokemonFragment;
 import com.example.cst438_project01_group11.HomePageFragments.TeamFragment;
+import com.example.cst438_project01_group11.models.Pokemon;
+import com.example.cst438_project01_group11.models.PokemonResults;
+import com.example.cst438_project01_group11.pokiapi.PokiapiService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.jetbrains.annotations.NotNull;
-import com.android.volley.Response;
-import com.example.cst438_project01_group11.models.Pokemon;
-import com.example.cst438_project01_group11.models.PokemonRes;
-import com.example.cst438_project01_group11.pokiapi.PokiapiService;
-
-import org.chromium.base.Callback;
-import org.chromium.base.Log;
 
 import java.util.ArrayList;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements PokedexFragment.PokedexFragmentInterface, RandomPokemonFragment.RandomFragmentInterface {
 
-   private Retrofit retrofit;
     private static final String TAG = "POKIDEX";
-
+    private ArrayList<Pokemon> mPokemons = new ArrayList<>();
     private BottomNavigationView mBottomNavigationView;
     private int mFragmentId;
 
@@ -43,25 +38,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        initBottomNavigationView();
-
-//        retrofit = new Retrofit.Builder()
-//                .baseUrl("http://pokeapi.co/api/v2/")
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
-       retrofit = new Retrofit.Builder()
-               .baseUrl("http://pokeapi.co/api/v2/")
-               .addConverterFactory(GsonConverterFactory.create())
-               .build();
-        obtenerDatos();
+        createBottomNavigationView();
+        obtainData();
     }
 
-    private void initBottomNavigationView() {
+    private void createBottomNavigationView() {
         mFragmentId = R.id.pokedex_navigation;
         mBottomNavigationView = findViewById(R.id.bottom_navigation);
         Fragment selectedFragment;
-        if(mFragmentId == R.id.pokedex_navigation) {
+        if (mFragmentId == R.id.pokedex_navigation) {
             selectedFragment = new PokedexFragment();
         } else if (mFragmentId == R.id.poketeam_navigation) {
             selectedFragment = new TeamFragment();
@@ -78,59 +63,61 @@ public class MainActivity extends AppCompatActivity {
         setBottomNavigationListener();
     }
 
-    private void obtenerDatos(){
+    private void obtainData() {
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://pokeapi.co/api/v2/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
        PokiapiService service = retrofit.create(PokiapiService.class);
-       Call<PokemonRes> pokemonResCall = service.obtenerListaPokemon();
+       Call<PokemonResults> pokemonResCall = service.obtainListPokemon(250, 0);
 
-//       pokemonResCall.enqueue(new Callback<PokemonRes>()){
-//           @Override
-//           public void onResponse(Call<PokemonRes> call, Response<PokemonRes> response) {
-//               if (response.isSuccessful()){
-//                   PokemonRes pokemonRes = response.body();
-//                   ArrayList<Pokemon> listaPokemon = pokemonRes.getResults();
-//
-//                   for(int i = 0; i < listaPokemon.size(); i++){
-//                       Pokemon p = listaPokemon.get(i);
-//                       Log.i(TAG, " Pokemon: " + p.getName());
-//                   }
-//               } else {
-//                   Log.e(TAG, " onResponse: " + response.errorBody());
-//               }
-//           }
-//           @Override
-//           public void onFailure(Call<PokemonRes> call, Throwable t){
-//               Log.e(TAG, " onFailure: " + t.getMessage())
-//           }
-//       });
+       pokemonResCall.enqueue(new Callback<PokemonResults>() {
+           @Override
+           public void onResponse(@NonNull Call<PokemonResults> call, @NonNull Response<PokemonResults> response) {
+               if(!response.isSuccessful()) {
+                   Toast.makeText(getApplicationContext(), getString(R.string.error_code) + response.code(), Toast.LENGTH_SHORT).show();
+                   return;
+               }
+               PokemonResults pokemonResults = response.body();
+               assert pokemonResults != null;
+               mPokemons = pokemonResults.getResults();
+           }
 
-
+           @Override
+           public void onFailure(@NonNull Call<PokemonResults> call, @NonNull Throwable t) {
+                Log.e(TAG, " onFailure: " + t.getMessage());
+           }
+       });
     }
 
     private void setBottomNavigationListener() {
-        mBottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
+        mBottomNavigationView.setOnItemSelectedListener(item -> {
 
-                Fragment selectedFragment;
-                mFragmentId = item.getItemId();
+            Fragment selectedFragment;
+            mFragmentId = item.getItemId();
 
-                if(mFragmentId == R.id.pokedex_navigation) {
-                    selectedFragment = new PokedexFragment();
-                } else if (mFragmentId == R.id.poketeam_navigation) {
-                    selectedFragment = new TeamFragment();
-                } else if( mFragmentId == R.id.random_pokemon_navigation) {
-                    selectedFragment = new RandomPokemonFragment();
-                } else {
-                    return false;
-                }
-
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragment_container, selectedFragment)
-                        .commit();
-                return true;
+            if (mFragmentId == R.id.pokedex_navigation) {
+                selectedFragment = new PokedexFragment();
+            } else if (mFragmentId == R.id.poketeam_navigation) {
+                selectedFragment = new TeamFragment();
+            } else if (mFragmentId == R.id.random_pokemon_navigation) {
+                selectedFragment = new RandomPokemonFragment();
+            } else {
+                return false;
             }
+
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, selectedFragment)
+                    .commit();
+            return true;
         });
     }
 
+    @Override
+    public ArrayList<Pokemon> getPokemons() {
+        return mPokemons;
+    }
 }

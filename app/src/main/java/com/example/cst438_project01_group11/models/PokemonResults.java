@@ -2,7 +2,7 @@ package com.example.cst438_project01_group11.models;
 
 import java.util.ArrayList;
 
-public class PokemonRes {
+public class PokemonResults {
     private ArrayList<Pokemon> results;
 
     public ArrayList<Pokemon> getResults() {
