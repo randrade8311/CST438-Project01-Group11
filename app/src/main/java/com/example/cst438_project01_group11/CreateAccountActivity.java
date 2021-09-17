@@ -63,6 +63,14 @@ public class CreateAccountActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     *
+     * @param name
+     * @param username
+     * @param password
+     * @param db
+     * @return
+     */
     public static String validate(String name, String username, String password, PokedexDatabase db) {
         // Check if fields are not empty, else
         if(username.equals("") || password.equals(""))
