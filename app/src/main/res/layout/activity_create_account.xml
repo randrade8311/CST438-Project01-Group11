@@ -39,6 +39,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:textSize="25sp"
+        android:password="true"
         android:fontFamily="serif-monospace"
         android:hint="Password"/>
 

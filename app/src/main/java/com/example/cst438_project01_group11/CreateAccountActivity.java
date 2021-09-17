@@ -32,25 +32,26 @@ public class CreateAccountActivity extends AppCompatActivity {
                 String username = username1.getText().toString();
                 String password = password1.getText().toString();
 
-                // Check if fields are not empty, else
-                if(username.equals("") || password.equals("")) {
-                    Toast.makeText(CreateAccountActivity.this, "Empty Field(s)", Toast.LENGTH_LONG).show();
-                }
-                else{
-                    // Check if User is in DB using username search
-                    User isInDb;
-                    isInDb = db.user().findByUsername(username);
-
-                    if(isInDb == null){ // Create new User instance and add to DB
-                        User user = new User(username, password);
+                String res = validate(name, username, password, db);
+                switch(res) {
+                    case "valid":
+                        User user = new User(name, username, password);
                         db.user().addUser(user);
-                        System.out.print("CREATED NEW USER!!!!!!");
-                        Toast.makeText(CreateAccountActivity.this, "Account Created", Toast.LENGTH_LONG).show();
-                    }
-                    else{ // Username was taken
-                        Toast.makeText(CreateAccountActivity.this, "Username taken", Toast.LENGTH_LONG).show();
-                    }
+                        Toast.makeText(CreateAccountActivity.this, "Account created!", Toast.LENGTH_LONG).show();
+                        break;
+                    case "username taken":
+                        Toast.makeText(CreateAccountActivity.this, "Username is already taken.", Toast.LENGTH_LONG).show();
+                        return;
+                    case "empty fields":
+                        Toast.makeText(CreateAccountActivity.this, "Empty Fields.", Toast.LENGTH_LONG).show();
+                        return;
                 }
+
+                Bundle bund = new Bundle();
+                bund.putString("username", username);
+                Intent i = new Intent(CreateAccountActivity.this, MainActivity.class);
+                i.putExtras(bund);
+                startActivity(i);
             }
         });
 
@@ -60,6 +61,23 @@ public class CreateAccountActivity extends AppCompatActivity {
             @Override
             public void onClick(View c){finish();}
         });
+    }
+
+    public static String validate(String name, String username, String password, PokedexDatabase db) {
+        // Check if fields are not empty, else
+        if(username.equals("") || password.equals(""))
+            return "empty fields";
+        else {
+            // Check if User is in DB using username search
+            User isInDb;
+            isInDb = db.user().findByUsername(username);
+
+            if(isInDb == null) // Create new User instance and add to DB
+                return "valid";
+            else // Username was taken
+                return "username taken";
+
+        }
     }
 }
 

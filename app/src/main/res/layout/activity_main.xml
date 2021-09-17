@@ -15,42 +15,4 @@
         android:layout_height="300dp"
         app:srcCompat="@drawable/d98dde45d242734" />
 
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:fontFamily="serif-monospace"
-        android:hint="Username"/>
-
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:fontFamily="serif-monospace"
-        android:hint="Password"/>
-
-    <Button
-        android:id="@+id/login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:padding="10dp"
-        android:text="Login"
-        android:textSize="20sp"
-        app:backgroundTint="#FFEB3B"
-        app:cornerRadius="210px" />
-
-    <Button
-        android:id="@+id/create_account"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:padding="10dp"
-        android:text="Create Account"
-        android:textSize="20sp"
-        app:backgroundTint="#FFEB3B"
-        app:cornerRadius="210px" />
-
 </LinearLayout>
