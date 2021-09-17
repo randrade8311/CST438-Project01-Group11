@@ -1,9 +1,11 @@
-package com.example.cst438_project01_group11;
+package com.example.cst438_project01_group11.Database;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+
+import com.example.cst438_project01_group11.User;
 
 import java.util.List;
 

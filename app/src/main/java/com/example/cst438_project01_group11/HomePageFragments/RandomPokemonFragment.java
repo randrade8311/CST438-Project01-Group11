@@ -15,16 +15,15 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.example.cst438_project01_group11.PokedexDatabase;
 import com.example.cst438_project01_group11.PokemonTypes;
 import com.example.cst438_project01_group11.R;
 import com.example.cst438_project01_group11.User;
 import com.example.cst438_project01_group11.models.Pokemon;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -40,6 +39,8 @@ public class RandomPokemonFragment extends Fragment {
     private TextView mType2;
     private MaterialButton mAddToTeam;
     private MaterialButton mRemoveFromTeam;
+    private MaterialCardView mCardt1;
+    private MaterialCardView mCardt2;
 
     //Interface to access data from MainActivity
     public interface RandomFragmentInterface {
@@ -102,12 +103,14 @@ public class RandomPokemonFragment extends Fragment {
         } else {
             mType1.setVisibility(View.GONE);
         }
-        if (mPokemon.getType2() != null) {
-            mType2.setText(mPokemon.getType2());
-            mType2.setBackgroundColor(PokemonTypes.getColor(mPokemon.getType2()));
-        } else {
-            mType2.setVisibility(View.GONE);
-        }
+        mType2.setVisibility(View.GONE);
+        mCardt2.setVisibility(View.GONE);
+//        if (mPokemon.getType2() != null) {
+//            mType2.setText(mPokemon.getType2());
+//            mType2.setBackgroundColor(PokemonTypes.getColor(mPokemon.getType2()));
+//        } else {
+//            mType2.setVisibility(View.GONE);
+//        }
     }
 
     //Find view elements and initialize them
@@ -118,6 +121,8 @@ public class RandomPokemonFragment extends Fragment {
         mType2 = view.findViewById(R.id.pokemon_type_2_text);
         mAddToTeam = view.findViewById(R.id.add_to_team_button);
         mRemoveFromTeam = view.findViewById(R.id.remove_from_team_button);
+        mCardt1 = view.findViewById(R.id.pokemon_card_type1);
+        mCardt2 = view.findViewById(R.id.pokemon_card_type2);
         addListeners();
     }
 

@@ -18,6 +18,7 @@ import com.example.cst438_project01_group11.PokemonTypes;
 import com.example.cst438_project01_group11.R;
 import com.example.cst438_project01_group11.models.Pokemon;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
 
 public class PokemonDialog extends DialogFragment {
 
@@ -27,6 +28,8 @@ public class PokemonDialog extends DialogFragment {
     private TextView mType2;
     private MaterialButton mAddToTeam;
     private MaterialButton mRemoveFromTeam;
+    private MaterialCardView mCardt1;
+    private MaterialCardView mCardt2;
 
     private Pokemon mPokemon;
 
@@ -47,6 +50,8 @@ public class PokemonDialog extends DialogFragment {
         mType2 = view.findViewById(R.id.pokemon_type_2_text);
         mAddToTeam = view.findViewById(R.id.add_to_team_button);
         mRemoveFromTeam = view.findViewById(R.id.remove_from_team_button);
+        mCardt1 = view.findViewById(R.id.pokemon_card_type1);
+        mCardt2 = view.findViewById(R.id.pokemon_card_type2);
         setInformation();
         builder.setView(view);
         return builder.create();
@@ -67,12 +72,14 @@ public class PokemonDialog extends DialogFragment {
         } else {
             mType1.setVisibility(View.GONE);
         }
-        if (mPokemon.getType2() != null) {
-            mType2.setText(mPokemon.getType2());
-            mType2.setBackgroundColor(PokemonTypes.getColor(mPokemon.getType2()));
-        } else {
-            mType2.setVisibility(View.GONE);
-        }
+        mType2.setVisibility(View.GONE);
+        mCardt2.setVisibility(View.GONE);
+//        if (mPokemon.getType2() != null) {
+//            mType2.setText(mPokemon.getType2());
+//            mType2.setBackgroundColor(PokemonTypes.getColor(mPokemon.getType2()));
+//        } else {
+//            mType2.setVisibility(View.GONE);
+//        }
 
         mAddToTeam.setOnClickListener(view -> {
             //TODO

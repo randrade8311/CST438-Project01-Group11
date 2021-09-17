@@ -3,9 +3,7 @@ package com.example.cst438_project01_group11.models;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.example.cst438_project01_group11.PokedexDatabase;
-
-import java.util.List;
+import com.example.cst438_project01_group11.Database.PokedexDatabase;
 
 @Entity(tableName = PokedexDatabase.POKEMON_TABLE)
 public class Pokemon {
@@ -16,7 +14,7 @@ public class Pokemon {
     private Integer id;
     private String name;
     private String type1;
-    private String type2;
+//    private String type2;
     private String url;
 
     public String getName() {
@@ -56,13 +54,13 @@ public class Pokemon {
         this.type1 = type1;
     }
 
-    public String getType2() {
-        return type2;
-    }
-
-    public void setType2(String type2) {
-        this.type2 = type2;
-    }
+//    public String getType2() {
+//        return type2;
+//    }
+//
+//    public void setType2(String type2) {
+//        this.type2 = type2;
+//    }
 
     public String getUrl() {
         return url;

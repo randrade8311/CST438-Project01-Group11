@@ -9,11 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.cst438_project01_group11.Database.PokedexDatabase;
+import com.example.cst438_project01_group11.Database.PokemonDao;
 import com.example.cst438_project01_group11.HomePageFragments.PokedexFragment;
 import com.example.cst438_project01_group11.HomePageFragments.RandomPokemonFragment;
 import com.example.cst438_project01_group11.HomePageFragments.TeamFragment;
 import com.example.cst438_project01_group11.models.Pokemon;
-import com.example.cst438_project01_group11.models.PokemonResults;
+import com.example.cst438_project01_group11.models.PokemonRes;
 import com.example.cst438_project01_group11.pokiapi.PokiapiService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -89,16 +91,16 @@ public class MainActivity extends AppCompatActivity implements PokedexFragment.P
                 .build();
 
         PokiapiService service = retrofit.create(PokiapiService.class);
-        Call<PokemonResults> pokemonResCall = service.obtainListPokemon(250, 0);
+        Call<PokemonRes> pokemonResCall = service.obtainListPokemon(250, 0);
 
-        pokemonResCall.enqueue(new Callback<PokemonResults>() {
+        pokemonResCall.enqueue(new Callback<PokemonRes>() {
             @Override
-            public void onResponse(@NonNull Call<PokemonResults> call, @NonNull Response<PokemonResults> response) {
+            public void onResponse(@NonNull Call<PokemonRes> call, @NonNull Response<PokemonRes> response) {
                 if (!response.isSuccessful()) {
                     Toast.makeText(getApplicationContext(), getString(R.string.error_code) + response.code(), Toast.LENGTH_SHORT).show();
                     return;
                 }
-                PokemonResults pokemonResults = response.body();
+                PokemonRes pokemonResults = response.body();
                 assert pokemonResults != null;
                 mPokemons = pokemonResults.getResults();
                 for (Pokemon p : mPokemons) {
@@ -107,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements PokedexFragment.P
             }
 
             @Override
-            public void onFailure(@NonNull Call<PokemonResults> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<PokemonRes> call, @NonNull Throwable t) {
                 Log.e(TAG, " onFailure: " + t.getMessage());
             }
         });

@@ -8,6 +8,8 @@ import android.content.Context;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
+import com.example.cst438_project01_group11.Database.PokedexDatabase;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
