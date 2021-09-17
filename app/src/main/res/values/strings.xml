@@ -1,3 +1,14 @@
-<resources>
-    <string name="app_name">PokeDex + Dream Team!</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name" tools:ignore="Typos">Pokedex</string>
+    <string name="pokedex">Pokedex</string>
+    <string name="team">Team</string>
+    <string name="random">Random</string>
+    <string name="search_pokemon">Search Pokemon</string>
+    <string name="pokemon_name">Pokemon Name</string>
+    <string name="pokemon_image">Pokemon Image</string>
+    <string name="search_icon">Search Icon</string>
+    <string name="pokemon_not_found">No pokemon found</string>
+    <string name="pokemon_type">Pokemon Type</string>
+    <string name="add_to_team">Add to Team</string>
+    <string name="remove_from_team">Remove from Team</string>
 </resources>
