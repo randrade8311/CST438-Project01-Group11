@@ -12,6 +12,9 @@ import androidx.fragment.app.Fragment;
 import com.example.cst438_project01_group11.HomePageFragments.PokedexFragment;
 import com.example.cst438_project01_group11.HomePageFragments.RandomPokemonFragment;
 import com.example.cst438_project01_group11.HomePageFragments.TeamFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import com.android.volley.Response;
 import com.example.cst438_project01_group11.models.Pokemon;
 import com.example.cst438_project01_group11.models.PokemonResults;
 import com.example.cst438_project01_group11.pokiapi.PokiapiService;
@@ -20,19 +23,16 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity implements PokedexFragment.PokedexFragmentInterface, RandomPokemonFragment.RandomFragmentInterface, TeamFragment.TeamFragmentInterface {
 
-    private static final String TAG = "POKIDEX";
     private List<Pokemon> mPokemons = new ArrayList<>();
+    private static final String TAG = "POKEDEX";
+
     private BottomNavigationView mBottomNavigationView;
     private int mFragmentId;
     private PokemonDao mPokemonDao;
