@@ -16,7 +16,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cst438_project01_group11.Adapters.PokemonRecyclerViewAdapter;
-import com.example.cst438_project01_group11.Database.Pokemon;
+import com.example.cst438_project01_group11.models.Pokemon;
+import com.example.cst438_project01_group11.PokedexDatabase;
 import com.example.cst438_project01_group11.R;
 
 import java.util.ArrayList;
@@ -29,13 +30,16 @@ public class PokedexFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     private PokemonRecyclerViewAdapter mAdapter;
 
-    private ArrayList<Pokemon> mPokemons;
+    private List<Pokemon> mPokemons;
+
+    PokedexDatabase pokedexDatabase;
 
     @Nullable
     @org.jetbrains.annotations.Nullable
     @Override
     public View onCreateView(@NonNull @org.jetbrains.annotations.NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.pokedex_layout, container, false);
+        View view = inflater.inflate(R.layout. pokedex_layout, container, false);
+        pokedexDatabase = PokedexDatabase.getInstance(getContext());
         mSearch = view.findViewById(R.id.home_page_pokemon_search_edittext);
         addListeners();
         mPokemons = getPokemonList();
@@ -47,12 +51,10 @@ public class PokedexFragment extends Fragment {
         mSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
@@ -64,31 +66,25 @@ public class PokedexFragment extends Fragment {
 
     private void filter(String text) {
         ArrayList<Pokemon> pokemons = new ArrayList<>();
-        for(Pokemon p: mPokemons) {
-            if(p.getName().toLowerCase().contains(text.toLowerCase())) {
+        for (Pokemon p : mPokemons) {
+            if (p.getName().toLowerCase().contains(text.toLowerCase())) {
                 pokemons.add(p);
             }
         }
-        if(pokemons.size() == 0) {
-            Toast.makeText(getContext(), getString(R.string.pokemon_not_found), Toast.LENGTH_SHORT).show();
-        } else {
-            mAdapter.filterList(pokemons);
-        }
+        mAdapter.filterList(pokemons);
     }
 
-    private ArrayList<Pokemon> getPokemonList() {
-        ArrayList<Pokemon> list = new ArrayList<>();
-        for(int i=1; i<=50; i++) {
-            list.add(new Pokemon(i, R.drawable.pokeball_icon, "Pokemon "+i));
-        }
+    private List<Pokemon> getPokemonList() {
+        List<Pokemon> list = pokedexDatabase.pokemon().getAllPokemon();
         return list;
     }
 
-    private void generateRecyclerView(View view, ArrayList<Pokemon> pokemonList) {
+    private void generateRecyclerView(View view, List<Pokemon> pokemonList) {
         mPokemonsView = view.findViewById(R.id.pokedex_recycler_view);
         mLayoutManager = new GridLayoutManager(getActivity(), 2);
-        mAdapter = new PokemonRecyclerViewAdapter(pokemonList);
+        mAdapter = new PokemonRecyclerViewAdapter(pokemonList, getContext());
         mPokemonsView.setLayoutManager(mLayoutManager);
         mPokemonsView.setAdapter(mAdapter);
+
     }
 }
