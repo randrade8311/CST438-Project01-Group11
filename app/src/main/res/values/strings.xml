@@ -13,4 +13,9 @@
     <string name="remove_from_team">Remove from Team</string>
     <string name="error_code">Error while fetching data: Error</string>
     <string name="remove">Remove</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="pokemon_text">Pokemon Text</string>
+    <string name="login">Login</string>
+    <string name="create_account">Create Account</string>
 </resources>

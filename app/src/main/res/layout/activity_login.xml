@@ -13,24 +13,28 @@
         android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="300dp"
-        app:srcCompat="@drawable/d98dde45d242734" />
+        app:srcCompat="@drawable/d98dde45d242734"
+        android:contentDescription="@string/pokemon_text"/>
 
     <EditText
         android:id="@+id/username"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:textSize="25sp"
+        android:inputType="text"
+        android:autofillHints="username"
         android:fontFamily="serif-monospace"
-        android:hint="Username"/>
+        android:hint="@string/username"/>
 
     <EditText
         android:id="@+id/password"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:textSize="25sp"
+        android:autofillHints="password"
         android:fontFamily="serif-monospace"
-        android:password="true"
-        android:hint="Password"/>
+        android:inputType="textPassword"
+        android:hint="@string/password"/>
 
     <Button
         android:id="@+id/login"
@@ -38,10 +42,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:padding="10dp"
-        android:text="Login"
+        android:text="@string/login"
         android:textSize="20sp"
         app:backgroundTint="#FFEB3B"
-        app:cornerRadius="210px" />
+        app:cornerRadius="210dp" />
 
     <Button
         android:id="@+id/create_account"
@@ -49,9 +53,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:padding="10dp"
-        android:text="Create Account"
+        android:text="@string/create_account"
         android:textSize="20sp"
         app:backgroundTint="#FFEB3B"
-        app:cornerRadius="210px" />
+        app:cornerRadius="210dp" />
 
 </LinearLayout>

@@ -2,7 +2,6 @@ package com.example.cst438_project01_group11;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -12,19 +11,18 @@ import androidx.fragment.app.Fragment;
 import com.example.cst438_project01_group11.HomePageFragments.PokedexFragment;
 import com.example.cst438_project01_group11.HomePageFragments.RandomPokemonFragment;
 import com.example.cst438_project01_group11.HomePageFragments.TeamFragment;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import com.android.volley.Response;
 import com.example.cst438_project01_group11.models.Pokemon;
 import com.example.cst438_project01_group11.models.PokemonResults;
 import com.example.cst438_project01_group11.pokiapi.PokiapiService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -36,19 +34,26 @@ public class MainActivity extends AppCompatActivity implements PokedexFragment.P
     private BottomNavigationView mBottomNavigationView;
     private int mFragmentId;
     private PokemonDao mPokemonDao;
+    private User mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         createBottomNavigationView();
-        mPokemonDao = Util.getPokemonDatabase(getApplicationContext());
+        getUser();
+        mPokemonDao = PokedexDatabase.getInstance(getApplicationContext()).getPokemonDao();
         if(mPokemonDao.getAllPokemons().size() <= 0) {
             obtainData();
         } else {
             mPokemons = mPokemonDao.getAllPokemons();
         }
 
+    }
+
+    private void getUser() {
+        String username = getIntent().getStringExtra(LoginActivity.USERNAME);
+        mUser = PokedexDatabase.getInstance(getApplicationContext()).user().findByUsername(username);
     }
 
     private void createBottomNavigationView() {

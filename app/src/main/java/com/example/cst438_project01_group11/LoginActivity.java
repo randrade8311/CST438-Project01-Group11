@@ -17,6 +17,8 @@ import java.util.List;
 public class LoginActivity extends AppCompatActivity {
     private PokedexDatabase db;
 
+    public static final String USERNAME = "com.example.cst438_project01_group11.USERNAME";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,51 +30,43 @@ public class LoginActivity extends AppCompatActivity {
         Button buttonForCreateNewAccount = findViewById(R.id.create_account);
 
         // creating on click listeners
-        buttonForLoginSystem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Input Values
-                EditText username1 = findViewById(R.id.username);
-                EditText password1 = findViewById(R.id.password);
-                String username = username1.getText().toString();
-                String password = password1.getText().toString();
+        buttonForLoginSystem.setOnClickListener(view -> {
+            // Input Values
+            EditText username1 = findViewById(R.id.username);
+            EditText password1 = findViewById(R.id.password);
+            String username = username1.getText().toString();
+            String password = password1.getText().toString();
 
 
 
-                /* Validation */
-                String res = validateUser(username, password, db);
+            /* Validation */
+            String res = validateUser(username, password, db);
 
-                switch(res) {
-                    case "valid":
-                        Bundle bund = new Bundle();
-                        bund.putString("username", username);
-                        Intent j = new Intent(LoginActivity.this, MainActivity.class);
-                        j.putExtras(bund);
-                        startActivity(j);
-                        break;
-                    case "wrong password":
-                        Context context = getApplicationContext();
-                        CharSequence text = "Wrong password.";
-                        int duration = Toast.LENGTH_SHORT;
-                        Toast toast = Toast.makeText(context, text, duration);
-                        toast.show();
-                        return;
-                    case "wrong username":
-                        Context context2 = getApplicationContext();
-                        CharSequence text2 = "Wrong username.";
-                        int duration2 = Toast.LENGTH_SHORT;
-                        Toast toast2 = Toast.makeText(context2, text2, duration2);
-                        toast2.show();
-                        return;
-                }
+            switch(res) {
+                case "valid":
+                    Intent j = new Intent(LoginActivity.this, MainActivity.class);
+                    j.putExtra(USERNAME, username);
+                    startActivity(j);
+                    break;
+                case "wrong password":
+                    Context context = getApplicationContext();
+                    CharSequence text = "Wrong password.";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    return;
+                case "wrong username":
+                    Context context2 = getApplicationContext();
+                    CharSequence text2 = "Wrong username.";
+                    int duration2 = Toast.LENGTH_SHORT;
+                    Toast toast2 = Toast.makeText(context2, text2, duration2);
+                    toast2.show();
+                    return;
             }
         });
-        buttonForCreateNewAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(LoginActivity.this, CreateAccountActivity.class);
-                startActivity(i);
-            }
+        buttonForCreateNewAccount.setOnClickListener(view -> {
+            Intent i = new Intent(LoginActivity.this, CreateAccountActivity.class);
+            startActivity(i);
         });
     }
 
