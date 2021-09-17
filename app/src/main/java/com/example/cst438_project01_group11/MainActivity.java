@@ -16,7 +16,6 @@ import com.example.cst438_project01_group11.HomePageFragments.RandomPokemonFragm
 import com.example.cst438_project01_group11.HomePageFragments.TeamFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import org.jetbrains.annotations.NotNull;
 import com.android.volley.Response;
 import com.example.cst438_project01_group11.models.Pokemon;
 import com.example.cst438_project01_group11.models.PokemonRes;
@@ -34,7 +33,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
 
    private Retrofit retrofit;
-    private static final String TAG = "POKIDEX";
+    private static final String TAG = "POKEDEX";
 
     private BottomNavigationView mBottomNavigationView;
     private int mFragmentId;
@@ -109,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
     private void setBottomNavigationListener() {
         mBottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                 Fragment selectedFragment;
                 mFragmentId = item.getItemId();

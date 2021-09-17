@@ -77,11 +77,15 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
+     * This function validates the users information when they attempt to login
+     * by iterating through user database and comparing username and password
+     * to find a match.
      *
-     * @param username
-     * @param password
-     * @param db
-     * @return
+     *
+     * @param username      string username to see if in user database
+     * @param password      string password to validate user
+     * @param db            database instance to check users
+     * @return              string status of validation, wrong username/password
      */
     public static String validateUser(String username, String password, PokedexDatabase db) {
         List<User> users = db.user().getAll();

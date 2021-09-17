@@ -64,12 +64,17 @@ public class CreateAccountActivity extends AppCompatActivity {
     }
 
     /**
+     * This function validates the provided username and password text fields before
+     * inserting into the database of Users (PokedexDatabase). It will run many
+     * checks including making sure fields are not empty, username isn't taken,
+     * and storing into database.
      *
-     * @param name
-     * @param username
-     * @param password
-     * @param db
-     * @return
+     *
+     * @param name          holds the new user's full name to store in database
+     * @param username      string username to validate for the user
+     * @param password      string password to store for user db
+     * @param db            database instance for storing and working with user db
+     * @return              string validation determining the status of the given username/password
      */
     public static String validate(String name, String username, String password, PokedexDatabase db) {
         // Check if fields are not empty, else
