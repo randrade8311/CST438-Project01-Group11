@@ -1,5 +1,6 @@
 package com.example.cst438_project01_group11.Adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,24 +10,26 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.cst438_project01_group11.Database.Pokemon;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.cst438_project01_group11.R;
-
-import org.jetbrains.annotations.NotNull;
+import com.example.cst438_project01_group11.models.Pokemon;
 
 import java.util.ArrayList;
 
 public class DreamTeamRVAdapter extends RecyclerView.Adapter<DreamTeamRVAdapter.DreamTeamViewHolder> {
     private ArrayList<Pokemon> pokemonArrayList;
+    private Context context;
 
-    public DreamTeamRVAdapter(ArrayList<Pokemon> pokemonArrayList){
+    public DreamTeamRVAdapter(ArrayList<Pokemon> pokemonArrayList, Context context){
         this.pokemonArrayList = pokemonArrayList;
+        this.context = context;
     }
 
     @NonNull
     @Override
     public DreamTeamRVAdapter.DreamTeamViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.team_layout, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.team_card_layout, parent, false);
         return new DreamTeamViewHolder(v);
     }
 
@@ -34,7 +37,12 @@ public class DreamTeamRVAdapter extends RecyclerView.Adapter<DreamTeamRVAdapter.
     public void onBindViewHolder(@NonNull DreamTeamRVAdapter.DreamTeamViewHolder holder, int position) {
         Pokemon currentPokemon = pokemonArrayList.get(position);
         holder.pokemonName.setText(currentPokemon.getName());
-        holder.pokemonImg.setImageResource(currentPokemon.getImage());
+        Glide.with(context)
+                .load(currentPokemon.getImageUrl())
+                .centerCrop()
+                .placeholder(R.drawable.pokeball_icon)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(holder.pokemonImg);
     }
 
     @Override

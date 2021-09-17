@@ -18,7 +18,7 @@
             android:layout_height="175dp"
             android:contentDescription="@string/pokemon_image"
             android:src="@drawable/pokeball_icon"
-            android:padding="5dp"
+            android:padding="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

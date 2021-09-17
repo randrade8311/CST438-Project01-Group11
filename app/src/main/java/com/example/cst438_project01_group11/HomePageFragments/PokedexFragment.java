@@ -85,9 +85,6 @@ public class PokedexFragment extends Fragment {
         mPokemonsView.setAdapter(mAdapter);
 
         mAdapter.setPokemonListener(position -> {
-//                mPokemons.get(position).setName(mPokemons.get(position).getImageUrl());
-//                mAdapter.notifyItemChanged(position);
-
             alertDialog(mPokemons.get(position));
         });
     }

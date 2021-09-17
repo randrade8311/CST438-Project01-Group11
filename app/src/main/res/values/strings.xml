@@ -12,4 +12,5 @@
     <string name="add_to_team">Add to Team</string>
     <string name="remove_from_team">Remove from Team</string>
     <string name="error_code">Error while fetching data: Error</string>
+    <string name="remove">Remove</string>
 </resources>
