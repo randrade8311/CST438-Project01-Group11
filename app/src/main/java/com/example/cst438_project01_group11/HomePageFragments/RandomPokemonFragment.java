@@ -38,7 +38,7 @@ public class RandomPokemonFragment extends Fragment {
     private MaterialButton mAddToTeam;
 
     public interface RandomFragmentInterface {
-        ArrayList<Pokemon> getPokemons();
+        List<Pokemon> getPokemons();
     }
 
     @Nullable

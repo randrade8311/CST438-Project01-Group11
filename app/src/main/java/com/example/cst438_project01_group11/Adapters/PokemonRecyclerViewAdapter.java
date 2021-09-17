@@ -25,11 +25,11 @@ import javax.security.auth.login.LoginException;
 
 public class PokemonRecyclerViewAdapter extends RecyclerView.Adapter<PokemonRecyclerViewAdapter.PokemonViewHolder> {
 
-    private ArrayList<Pokemon> mPokemonList;
+    private List<Pokemon> mPokemonList;
     private PokemonClickListener mListener;
     private Context context;
 
-    public PokemonRecyclerViewAdapter(ArrayList<Pokemon> pokemonList, Context context) {
+    public PokemonRecyclerViewAdapter(List<Pokemon> pokemonList, Context context) {
         mPokemonList = pokemonList;
         this.context = context;
     }
@@ -91,7 +91,7 @@ public class PokemonRecyclerViewAdapter extends RecyclerView.Adapter<PokemonRecy
         return 0;
     }
 
-    public void filterList(ArrayList<Pokemon> filteredPokemons) {
+    public void filterList(List<Pokemon> filteredPokemons) {
         mPokemonList = filteredPokemons;
         notifyDataSetChanged();
     }

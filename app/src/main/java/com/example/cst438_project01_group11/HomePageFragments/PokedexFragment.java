@@ -21,6 +21,7 @@ import com.example.cst438_project01_group11.R;
 import com.example.cst438_project01_group11.models.Pokemon;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class PokedexFragment extends Fragment {
@@ -31,10 +32,10 @@ public class PokedexFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     private PokemonRecyclerViewAdapter mAdapter;
 
-    private ArrayList<Pokemon> mPokemons;
+    private List<Pokemon> mPokemons;
 
     public interface PokedexFragmentInterface {
-        ArrayList<Pokemon> getPokemons();
+        List<Pokemon> getPokemons();
     }
 
     @Nullable
@@ -77,16 +78,14 @@ public class PokedexFragment extends Fragment {
     }
 
 
-    private void generateRecyclerView(View view, ArrayList<Pokemon> pokemonList) {
+    private void generateRecyclerView(View view, List<Pokemon> pokemonList) {
         mPokemonsView = view.findViewById(R.id.pokedex_recycler_view);
         mLayoutManager = new GridLayoutManager(getActivity(), 2);
         mAdapter = new PokemonRecyclerViewAdapter(pokemonList, getContext());
         mPokemonsView.setLayoutManager(mLayoutManager);
         mPokemonsView.setAdapter(mAdapter);
 
-        mAdapter.setPokemonListener(position -> {
-            alertDialog(mPokemons.get(position));
-        });
+        mAdapter.setPokemonListener(position -> alertDialog(mPokemons.get(position)));
     }
 
     private void alertDialog(Pokemon pokemon) {

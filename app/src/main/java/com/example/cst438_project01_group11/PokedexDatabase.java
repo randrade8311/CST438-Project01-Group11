@@ -15,6 +15,7 @@ public abstract class PokedexDatabase extends RoomDatabase {
     private static PokedexDatabase sInstance;
     public abstract DreamTeamDao dreamTeam();
     public abstract UserDao user();
+    public abstract PokemonDao getPokemonDao();
 
     public static synchronized PokedexDatabase getInstance(Context context){
         if (sInstance == null){

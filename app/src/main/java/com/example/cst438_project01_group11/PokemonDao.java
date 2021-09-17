@@ -8,6 +8,7 @@ import androidx.room.Update;
 
 import com.example.cst438_project01_group11.models.Pokemon;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao

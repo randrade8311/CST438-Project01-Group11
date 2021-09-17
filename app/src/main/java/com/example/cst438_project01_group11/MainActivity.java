@@ -20,6 +20,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import retrofit2.Call;
@@ -31,16 +32,23 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity implements PokedexFragment.PokedexFragmentInterface, RandomPokemonFragment.RandomFragmentInterface, TeamFragment.TeamFragmentInterface {
 
     private static final String TAG = "POKIDEX";
-    private ArrayList<Pokemon> mPokemons = new ArrayList<>();
+    private List<Pokemon> mPokemons = new ArrayList<>();
     private BottomNavigationView mBottomNavigationView;
     private int mFragmentId;
+    private PokemonDao mPokemonDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         createBottomNavigationView();
-        obtainData();
+        mPokemonDao = Util.getPokemonDatabase(getApplicationContext());
+        if(mPokemonDao.getAllPokemons().size() <= 0) {
+            obtainData();
+        } else {
+            mPokemons = mPokemonDao.getAllPokemons();
+        }
+
     }
 
     private void createBottomNavigationView() {
@@ -84,6 +92,9 @@ public class MainActivity extends AppCompatActivity implements PokedexFragment.P
                PokemonResults pokemonResults = response.body();
                assert pokemonResults != null;
                mPokemons = pokemonResults.getResults();
+               for(Pokemon p: mPokemons) {
+                   mPokemonDao.addPokemon(p);
+               }
            }
 
            @Override
@@ -118,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements PokedexFragment.P
     }
 
     @Override
-    public ArrayList<Pokemon> getPokemons() {
+    public List<Pokemon> getPokemons() {
         return mPokemons;
     }
 
