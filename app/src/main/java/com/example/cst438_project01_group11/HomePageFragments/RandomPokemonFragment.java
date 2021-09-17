@@ -65,24 +65,24 @@ public class RandomPokemonFragment extends Fragment {
         setPokemonName();
         setTypeColors();
         setImage();
-        setButtons();
+//        setButtons();
     }
 
     //Set buttons visibility based on if the pokemon is present in dream team of the user.
-    private void setButtons() {
-        if(PokedexDatabase.getInstance(getContext()).dreamTeam().getDreamTeamByUsername(mUser.getUUsername()).getTeamPokemonNames().contains(mPokemon.getName())) {
-            mAddToTeam.setVisibility(View.GONE);
-            mRemoveFromTeam.setVisibility(View.VISIBLE);
-        } else {
-            mAddToTeam.setVisibility(View.VISIBLE);
-            mRemoveFromTeam.setVisibility(View.GONE);
-        }
-    }
+//    private void setButtons() {
+//        if(PokedexDatabase.getInstance(getContext()).dreamTeam().getDreamTeamByUsername(mUser.getUUsername()).getTeamPokemonNames().contains(mPokemon.getName())) {
+//            mAddToTeam.setVisibility(View.GONE);
+//            mRemoveFromTeam.setVisibility(View.VISIBLE);
+//        } else {
+//            mAddToTeam.setVisibility(View.VISIBLE);
+//            mRemoveFromTeam.setVisibility(View.GONE);
+//        }
+//    }
 
     //Set image using Glide api
     private void setImage() {
         Glide.with(getContext())
-                .load(mPokemon.getImageUrl())
+                .load(mPokemon.getHighResImage())
                 .centerCrop()
                 .placeholder(R.drawable.pokeball_icon)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)

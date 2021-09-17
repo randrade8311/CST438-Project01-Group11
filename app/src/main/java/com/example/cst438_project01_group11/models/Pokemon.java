@@ -76,6 +76,10 @@ public class Pokemon {
         if (id == null) {
             getId();
         }
+        return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + id + ".png";
+    }
+
+    public String getHighResImage() {
         return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + id + ".png";
     }
 

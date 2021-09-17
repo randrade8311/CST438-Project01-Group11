@@ -54,7 +54,7 @@ public class PokemonDialog extends DialogFragment {
 
     private void setInformation() {
         Glide.with(getContext())
-                .load(mPokemon.getImageUrl())
+                .load(mPokemon.getHighResImage())
                 .centerCrop()
                 .placeholder(R.drawable.pokeball_icon)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
