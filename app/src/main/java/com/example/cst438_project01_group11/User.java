@@ -55,4 +55,14 @@ public class User {
     public void setUPassword(String cPassword) {
         this.uPassword = cPassword;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + uId +
+                ", uName='" + uName + '\'' +
+                ", uUsername='" + uUsername + '\'' +
+                ", uPassword='" + uPassword + '\'' +
+                '}';
+    }
 }

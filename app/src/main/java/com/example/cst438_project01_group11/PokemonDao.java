@@ -13,6 +13,17 @@ import java.util.List;
 
 @Dao
 public interface PokemonDao {
+    @Insert
+    void addPokemon(Pokemon pokemon);
+
+    @Query("SELECT COUNT(*) FROM pokemon")
+    int count();
+
+    @Query("SELECT * FROM pokemon")
+    List<Pokemon> getAllPokemon();
+
+    @Query("SELECT * FROM pokemon WHERE id is :id")
+    Pokemon getPokemon(int id);
 
     @Insert
     void addPokemon(Pokemon pokemon);
@@ -29,4 +40,6 @@ public interface PokemonDao {
     @Delete
     void delete(Pokemon pokemon);
 
+    @Query("DELETE FROM pokemon")
+    public void nukeTable();
 }
