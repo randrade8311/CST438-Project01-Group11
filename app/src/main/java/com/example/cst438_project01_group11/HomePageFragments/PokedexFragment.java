@@ -18,11 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.cst438_project01_group11.Adapters.PokemonDialog;
 import com.example.cst438_project01_group11.Adapters.PokemonRecyclerViewAdapter;
 import com.example.cst438_project01_group11.R;
+import com.example.cst438_project01_group11.User;
 import com.example.cst438_project01_group11.models.Pokemon;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class PokedexFragment extends Fragment {
 
@@ -33,9 +33,12 @@ public class PokedexFragment extends Fragment {
     private PokemonRecyclerViewAdapter mAdapter;
 
     private List<Pokemon> mPokemons;
+    private User mUser;
 
+    //Interface to access data from MainActivity
     public interface PokedexFragmentInterface {
         List<Pokemon> getPokemons();
+        User getUser();
     }
 
     @Nullable
@@ -44,13 +47,15 @@ public class PokedexFragment extends Fragment {
     public View onCreateView(@NonNull @org.jetbrains.annotations.NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.pokedex_layout, container, false);
         mPokemons = mInterface.getPokemons();
+        mUser = mInterface.getUser();
         mSearch = view.findViewById(R.id.home_page_pokemon_search_edittext);
-        addListeners();
+        addSearchListener();
         generateRecyclerView(view, mPokemons);
         return view;
     }
 
-    private void addListeners() {
+    //Add edit text listener for searching the pokemon list using pokemon name
+    private void addSearchListener() {
         mSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -67,6 +72,11 @@ public class PokedexFragment extends Fragment {
         });
     }
 
+    /**
+     * This function takes search input from User and updates the results present in the
+     * Recycler View.
+     * @param text to get search text input
+     */
     private void filter(String text) {
         ArrayList<Pokemon> pokemons = new ArrayList<>();
         for (Pokemon p : mPokemons) {
@@ -77,7 +87,12 @@ public class PokedexFragment extends Fragment {
         mAdapter.filterList(pokemons);
     }
 
-
+    /**
+     * This function takes current view and list of pokemon to populate the Recycler
+     * view.
+     * @param view Current view to find and populate the recycler view
+     * @param pokemonList List to populate recycler view content
+     */
     private void generateRecyclerView(View view, List<Pokemon> pokemonList) {
         mPokemonsView = view.findViewById(R.id.pokedex_recycler_view);
         mLayoutManager = new GridLayoutManager(getActivity(), 2);
@@ -88,6 +103,11 @@ public class PokedexFragment extends Fragment {
         mAdapter.setPokemonListener(position -> alertDialog(mPokemons.get(position)));
     }
 
+    /**
+     * This function takes a pokemon and generates an alert Dialog with Pokemon
+     * information.
+     * @param pokemon Pokemon that shows up in the dialog.
+     */
     private void alertDialog(Pokemon pokemon) {
         PokemonDialog pokemonDialog = new PokemonDialog(pokemon);
         pokemonDialog.setCancelable(true);

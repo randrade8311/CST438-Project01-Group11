@@ -38,4 +38,7 @@ public interface DreamTeamDao {
 
     @Query("UPDATE dreamTeam SET pokemon6 = :pokemon6 WHERE uId = :uId")
     int updatePoke6(String pokemon6, int uId);
+
+    @Query("SELECT * FROM dreamTeam where username = :username")
+    DreamTeam getDreamTeamByUsername(String username);
 }

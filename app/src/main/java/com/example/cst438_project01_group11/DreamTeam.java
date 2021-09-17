@@ -4,6 +4,12 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.example.cst438_project01_group11.models.Pokemon;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 @Entity(tableName = "dreamTeam")
 public class DreamTeam {
     @PrimaryKey(autoGenerate = true)
@@ -103,5 +109,16 @@ public class DreamTeam {
 
     public void setPokemon6(String pokemon6) {
         this.pokemon6 = pokemon6;
+    }
+
+    public List<String> getTeamPokemonNames() {
+        List<String> pokemons = new ArrayList<>();
+        pokemons.add(pokemon1);
+        pokemons.add(pokemon2);
+        pokemons.add(pokemon3);
+        pokemons.add(pokemon4);
+        pokemons.add(pokemon5);
+        pokemons.add(pokemon6);
+        return pokemons;
     }
 }

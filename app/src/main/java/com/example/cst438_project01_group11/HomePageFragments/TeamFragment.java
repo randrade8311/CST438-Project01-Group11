@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cst438_project01_group11.Adapters.DreamTeamRVAdapter;
 import com.example.cst438_project01_group11.R;
+import com.example.cst438_project01_group11.User;
 import com.example.cst438_project01_group11.models.Pokemon;
 
 import org.jetbrains.annotations.NotNull;
@@ -28,9 +29,11 @@ public class TeamFragment extends Fragment {
     private DreamTeamRVAdapter mAdapter;
 
     private ArrayList<Pokemon> mTeam;
+    private User mUser;
 
     public interface TeamFragmentInterface {
         ArrayList<Pokemon> getTeam();
+        User getUser();
     }
 
     @Nullable
@@ -39,10 +42,17 @@ public class TeamFragment extends Fragment {
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dreamteam_layout, container, false);
         mTeam = mInterface.getTeam();
+        mUser = mInterface.getUser();
         generateRecyclerView(view, mTeam);
         return view;
     }
 
+    /**
+     * This function takes current view and list of pokemon to populate the Recycler
+     * view.
+     * @param view Current view to find and populate the recycler view
+     * @param team List to populate recycler view content
+     */
     private void generateRecyclerView(View view, ArrayList<Pokemon> team) {
         mTeamView = view.findViewById(R.id.team_recycler_view);
         mLayoutManager = new GridLayoutManager(getActivity(), 2);

@@ -1,5 +1,6 @@
 package com.example.cst438_project01_group11;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -28,9 +29,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity implements PokedexFragment.PokedexFragmentInterface, RandomPokemonFragment.RandomFragmentInterface, TeamFragment.TeamFragmentInterface {
 
+    //List to store results from PokeApi and Database
     private List<Pokemon> mPokemons = new ArrayList<>();
     private static final String TAG = "POKEDEX";
 
+    //Bottom Navigation switch between the three fragments
     private BottomNavigationView mBottomNavigationView;
     private int mFragmentId;
     private PokemonDao mPokemonDao;
@@ -41,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements PokedexFragment.P
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         createBottomNavigationView();
-        getUser();
+        setUser();
         mPokemonDao = PokedexDatabase.getInstance(getApplicationContext()).getPokemonDao();
         if (mPokemonDao.getAllPokemons().size() <= 0) {
             obtainData();
@@ -51,24 +54,24 @@ public class MainActivity extends AppCompatActivity implements PokedexFragment.P
 
     }
 
-    private void getUser() {
+
+    //Get user from intent, if no user present in intent start Login Activity
+    private void setUser() {
         String username = getIntent().getStringExtra(LoginActivity.USERNAME);
+        if(username == null) {
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            intent.putExtra(LoginActivity.USERNAME, "");
+            startActivity(intent);
+        }
         mUser = PokedexDatabase.getInstance(getApplicationContext()).user().findByUsername(username);
     }
 
+    //Initialize bottom navigation to make switching between fragments possible
     private void createBottomNavigationView() {
         mFragmentId = R.id.pokedex_navigation;
         mBottomNavigationView = findViewById(R.id.bottom_navigation);
-        Fragment selectedFragment;
-        if (mFragmentId == R.id.pokedex_navigation) {
-            selectedFragment = new PokedexFragment();
-        } else if (mFragmentId == R.id.poketeam_navigation) {
-            selectedFragment = new TeamFragment();
-        } else if (mFragmentId == R.id.random_pokemon_navigation) {
-            selectedFragment = new RandomPokemonFragment();
-        } else {
-            selectedFragment = new PokedexFragment();
-        }
+        Fragment selectedFragment = new PokedexFragment();
+
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, selectedFragment)
@@ -77,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements PokedexFragment.P
         setBottomNavigationListener();
     }
 
+    //Pull pokemon data from PokeApi
     private void obtainData() {
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -109,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements PokedexFragment.P
         });
     }
 
+    //Set Navigation Listener to switch between fragments when clicked
     private void setBottomNavigationListener() {
         mBottomNavigationView.setOnItemSelectedListener(item -> {
 
@@ -133,11 +138,13 @@ public class MainActivity extends AppCompatActivity implements PokedexFragment.P
         });
     }
 
+    //Return pokemon list to fragments
     @Override
     public List<Pokemon> getPokemons() {
         return mPokemons;
     }
 
+    //Return team to Team Fragment
     @Override
     public ArrayList<Pokemon> getTeam() {
         ArrayList<Pokemon> team = new ArrayList<>();
@@ -146,5 +153,11 @@ public class MainActivity extends AppCompatActivity implements PokedexFragment.P
             team.add(mPokemons.get(random.nextInt(mPokemons.size())));
         }
         return team;
+    }
+
+    //Return user to fragments
+    @Override
+    public User getUser() {
+        return mUser;
     }
 }
