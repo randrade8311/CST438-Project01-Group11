@@ -21,7 +21,7 @@ public class DreamTeamRVAdapter extends RecyclerView.Adapter<DreamTeamRVAdapter.
     private ArrayList<Pokemon> pokemonArrayList;
     private Context context;
 
-    public DreamTeamRVAdapter(ArrayList<Pokemon> pokemonArrayList, Context context){
+    public DreamTeamRVAdapter(ArrayList<Pokemon> pokemonArrayList, Context context) {
         this.pokemonArrayList = pokemonArrayList;
         this.context = context;
     }

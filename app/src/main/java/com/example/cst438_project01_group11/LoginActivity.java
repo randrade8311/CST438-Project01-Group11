@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
             /* Validation */
             String res = validateUser(username, password, db);
 
-            switch(res) {
+            switch (res) {
                 case "valid":
                     Intent j = new Intent(LoginActivity.this, MainActivity.class);
                     j.putExtra(USERNAME, username);
@@ -75,16 +75,15 @@ public class LoginActivity extends AppCompatActivity {
      * by iterating through user database and comparing username and password
      * to find a match.
      *
-     *
-     * @param username      string username to see if in user database
-     * @param password      string password to validate user
-     * @param db            database instance to check users
-     * @return              string status of validation, wrong username/password
+     * @param username string username to see if in user database
+     * @param password string password to validate user
+     * @param db       database instance to check users
+     * @return string status of validation, wrong username/password
      */
     public static String validateUser(String username, String password, PokedexDatabase db) {
         List<User> users = db.user().getAll();
 
-        for(int i = 0; i < users.size(); i++) {
+        for (int i = 0; i < users.size(); i++) {
             if (users.get(i).getUUsername().equals(username)) {
                 if (users.get(i).getUPassword().equals(password)) {
                     return "valid";

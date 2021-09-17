@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements PokedexFragment.P
         createBottomNavigationView();
         getUser();
         mPokemonDao = PokedexDatabase.getInstance(getApplicationContext()).getPokemonDao();
-        if(mPokemonDao.getAllPokemons().size() <= 0) {
+        if (mPokemonDao.getAllPokemons().size() <= 0) {
             obtainData();
         } else {
             mPokemons = mPokemonDao.getAllPokemons();
@@ -84,29 +84,29 @@ public class MainActivity extends AppCompatActivity implements PokedexFragment.P
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-       PokiapiService service = retrofit.create(PokiapiService.class);
-       Call<PokemonResults> pokemonResCall = service.obtainListPokemon(250, 0);
+        PokiapiService service = retrofit.create(PokiapiService.class);
+        Call<PokemonResults> pokemonResCall = service.obtainListPokemon(250, 0);
 
-       pokemonResCall.enqueue(new Callback<PokemonResults>() {
-           @Override
-           public void onResponse(@NonNull Call<PokemonResults> call, @NonNull Response<PokemonResults> response) {
-               if(!response.isSuccessful()) {
-                   Toast.makeText(getApplicationContext(), getString(R.string.error_code) + response.code(), Toast.LENGTH_SHORT).show();
-                   return;
-               }
-               PokemonResults pokemonResults = response.body();
-               assert pokemonResults != null;
-               mPokemons = pokemonResults.getResults();
-               for(Pokemon p: mPokemons) {
-                   mPokemonDao.addPokemon(p);
-               }
-           }
+        pokemonResCall.enqueue(new Callback<PokemonResults>() {
+            @Override
+            public void onResponse(@NonNull Call<PokemonResults> call, @NonNull Response<PokemonResults> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(getApplicationContext(), getString(R.string.error_code) + response.code(), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                PokemonResults pokemonResults = response.body();
+                assert pokemonResults != null;
+                mPokemons = pokemonResults.getResults();
+                for (Pokemon p : mPokemons) {
+                    mPokemonDao.addPokemon(p);
+                }
+            }
 
-           @Override
-           public void onFailure(@NonNull Call<PokemonResults> call, @NonNull Throwable t) {
+            @Override
+            public void onFailure(@NonNull Call<PokemonResults> call, @NonNull Throwable t) {
                 Log.e(TAG, " onFailure: " + t.getMessage());
-           }
-       });
+            }
+        });
     }
 
     private void setBottomNavigationListener() {
@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements PokedexFragment.P
     public ArrayList<Pokemon> getTeam() {
         ArrayList<Pokemon> team = new ArrayList<>();
         Random random = new Random();
-        for(int i=0; i<6; i++) {
+        for (int i = 0; i < 6; i++) {
             team.add(mPokemons.get(random.nextInt(mPokemons.size())));
         }
         return team;

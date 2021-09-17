@@ -16,12 +16,15 @@ public abstract class PokedexDatabase extends RoomDatabase {
     public static final String POKEMON_TABLE = "POKEMON_TABLE";
 
     private static PokedexDatabase sInstance;
+
     public abstract DreamTeamDao dreamTeam();
+
     public abstract UserDao user();
+
     public abstract PokemonDao getPokemonDao();
 
-    public static synchronized PokedexDatabase getInstance(Context context){
-        if (sInstance == null){
+    public static synchronized PokedexDatabase getInstance(Context context) {
+        if (sInstance == null) {
             sInstance = Room
                     .databaseBuilder(context.getApplicationContext(),
                             PokedexDatabase.class,
@@ -36,7 +39,7 @@ public abstract class PokedexDatabase extends RoomDatabase {
     public void printUsers() {
         List<User> users = user().getAll();
         Log.i("DB", String.valueOf(user().count()));
-        for(int i = 0; i < user().count(); i++) {
+        for (int i = 0; i < user().count(); i++) {
             Log.i("DB", users.get(i).toString());
         }
     }

@@ -1,47 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@color/black"
     android:gravity="center"
+    android:orientation="vertical"
     tools:context=".CreateAccountActivity">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="30sp"
-        android:text="Be apart of the all-exclusive club of PokéFanatics!"
         android:layout_margin="20dp"
-        android:padding="20dp" />
+        android:gravity="center"
+        android:padding="20dp"
+        android:text="@string/be_apart_of_the_all_exclusive_club_of_pok_fanatics"
+        android:textSize="30sp" />
 
     <EditText
         android:id="@+id/name"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:textSize="25sp"
+        android:autofillHints="name"
         android:fontFamily="serif-monospace"
-        android:hint="Name"/>
+        android:hint="@string/name"
+        android:inputType="text"
+        android:textSize="25sp" />
 
     <EditText
         android:id="@+id/username"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:textSize="25sp"
+        android:autofillHints="username"
         android:fontFamily="serif-monospace"
-        android:hint="Username"/>
+        android:hint="@string/username"
+        android:inputType="text"
+        android:textSize="25sp" />
 
     <EditText
         android:id="@+id/password"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:password="true"
+        android:autofillHints="password"
         android:fontFamily="serif-monospace"
-        android:hint="Password"/>
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:textSize="25sp" />
 
     <Button
         android:id="@+id/submit"
@@ -49,10 +54,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:padding="10dp"
-        android:text="Submit"
+        android:text="@string/submit"
         android:textSize="20sp"
-        app:backgroundTint="#FFEB3B"
-        app:cornerRadius="210px" />
+        app:backgroundTint="?attr/colorPrimary"
+        app:cornerRadius="15dp" />
 
 
     <TableRow
@@ -60,18 +65,18 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginTop="40dp" >
+        android:layout_marginTop="40dp">
 
         <Button
             android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="20dp"
             android:padding="10dp"
-            android:text="Back"
+            android:text="@string/back"
             android:textSize="20sp"
-            app:backgroundTint="#FFEB3B"
-            app:cornerRadius="210px" />
+            app:backgroundTint="?attr/colorPrimary"
+            app:cornerRadius="15dp" />
 
     </TableRow>
 

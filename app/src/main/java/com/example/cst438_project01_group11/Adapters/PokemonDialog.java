@@ -61,13 +61,13 @@ public class PokemonDialog extends DialogFragment {
                 .into(mPokemonImage);
         mPokemonName.setText(mPokemon.getName());
 
-        if(mPokemon.getType1() != null) {
+        if (mPokemon.getType1() != null) {
             mType1.setText(mPokemon.getType1());
             mType1.setBackgroundColor(PokemonTypes.getColor(mPokemon.getType1()));
         } else {
             mType1.setVisibility(View.GONE);
         }
-        if(mPokemon.getType2() != null) {
+        if (mPokemon.getType2() != null) {
             mType2.setText(mPokemon.getType2());
             mType2.setBackgroundColor(PokemonTypes.getColor(mPokemon.getType2()));
         } else {

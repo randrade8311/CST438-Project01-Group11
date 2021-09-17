@@ -36,7 +36,7 @@ public enum PokemonTypes {
     }
 
     public static int getColor(String type) {
-        if(PokemonTypes.BUG.getType().equals(type.toLowerCase())) {
+        if (PokemonTypes.BUG.getType().equals(type.toLowerCase())) {
             return Color.parseColor(PokemonTypes.BUG.getColorString());
         } else if (PokemonTypes.NORMAL.getType().equals(type)) {
             return Color.parseColor(PokemonTypes.NORMAL.getColorString());
@@ -54,7 +54,7 @@ public enum PokemonTypes {
             return Color.parseColor(PokemonTypes.FIRE.getColorString());
         } else if (PokemonTypes.FLYING.getType().equals(type)) {
             return Color.parseColor(PokemonTypes.FLYING.getColorString());
-        }  else if (PokemonTypes.GHOST.getType().equals(type)) {
+        } else if (PokemonTypes.GHOST.getType().equals(type)) {
             return Color.parseColor(PokemonTypes.GHOST.getColorString());
         } else if (PokemonTypes.GRASS.getType().equals(type)) {
             return Color.parseColor(PokemonTypes.GRASS.getColorString());
@@ -68,7 +68,7 @@ public enum PokemonTypes {
             return Color.parseColor(PokemonTypes.PSYCHIC.getColorString());
         } else if (PokemonTypes.ROCK.getType().equals(type)) {
             return Color.parseColor(PokemonTypes.ROCK.getColorString());
-        }  else if (PokemonTypes.STEEL.getType().equals(type)) {
+        } else if (PokemonTypes.STEEL.getType().equals(type)) {
             return Color.parseColor(PokemonTypes.STEEL.getColorString());
         } else if (PokemonTypes.WATER.getType().equals(type)) {
             return Color.parseColor(PokemonTypes.WATER.getColorString());

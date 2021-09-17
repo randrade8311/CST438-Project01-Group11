@@ -52,9 +52,9 @@ public class PokemonRecyclerViewAdapter extends RecyclerView.Adapter<PokemonRecy
             mPokemonName = itemView.findViewById(R.id.pokemon_card_name);
 
             itemView.setOnClickListener(view -> {
-                if(listener != null) {
+                if (listener != null) {
                     int position = getAdapterPosition();
-                    if(position != RecyclerView.NO_POSITION) {
+                    if (position != RecyclerView.NO_POSITION) {
                         listener.onItemClick(position);
                     }
                 }
@@ -84,7 +84,7 @@ public class PokemonRecyclerViewAdapter extends RecyclerView.Adapter<PokemonRecy
 
     @Override
     public int getItemCount() {
-        if(mPokemonList != null)
+        if (mPokemonList != null)
             return mPokemonList.size();
         else
             Log.e("ADAPTER", "Null ArrayList");

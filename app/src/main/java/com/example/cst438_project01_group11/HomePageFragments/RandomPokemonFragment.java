@@ -73,13 +73,13 @@ public class RandomPokemonFragment extends Fragment {
     }
 
     private void setTypeColors() {
-        if(mPokemon.getType1() != null) {
+        if (mPokemon.getType1() != null) {
             mType1.setText(mPokemon.getType1());
             mType1.setBackgroundColor(PokemonTypes.getColor(mPokemon.getType1()));
         } else {
             mType1.setVisibility(View.GONE);
         }
-        if(mPokemon.getType2() != null) {
+        if (mPokemon.getType2() != null) {
             mType2.setText(mPokemon.getType2());
             mType2.setBackgroundColor(PokemonTypes.getColor(mPokemon.getType2()));
         } else {
@@ -103,7 +103,7 @@ public class RandomPokemonFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if(context instanceof RandomFragmentInterface) {
+        if (context instanceof RandomFragmentInterface) {
             mInterface = (RandomFragmentInterface) context;
         } else {
             throw new RuntimeException(context.toString() + " must implement RandomFragmentInterface");

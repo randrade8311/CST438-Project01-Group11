@@ -33,7 +33,9 @@ public class DreamTeam {
     @ColumnInfo(name = "pokemon6")
     private String pokemon6;
 
-    public int getDtId() { return dtId;};
+    public int getDtId() {
+        return dtId;
+    }
 
     public void setDtId(int dtId) {
         this.dtId = dtId;

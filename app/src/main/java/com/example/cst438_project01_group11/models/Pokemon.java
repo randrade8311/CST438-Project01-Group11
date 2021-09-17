@@ -36,9 +36,9 @@ public class Pokemon {
     }
 
     public Integer getId() {
-        if(id == null) {
+        if (id == null) {
             String text = "https://pokeapi.co/api/v2/pokemon/";
-            String s = url.substring(text.length(), url.length()-1);
+            String s = url.substring(text.length(), url.length() - 1);
             id = Integer.parseInt(s);
         }
         return id;
@@ -73,7 +73,7 @@ public class Pokemon {
     }
 
     public String getImageUrl() {
-        if(id == null) {
+        if (id == null) {
             getId();
         }
         return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + id + ".png";

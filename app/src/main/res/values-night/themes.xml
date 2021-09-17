@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.CST438Project01Group11" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#79A6DF</item>
+        <item name="colorPrimary">#FFF071</item>
         <item name="colorPrimaryVariant">@color/black</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->

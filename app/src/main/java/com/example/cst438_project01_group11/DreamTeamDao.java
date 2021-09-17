@@ -17,7 +17,7 @@ public interface DreamTeamDao {
     @Query("SELECT * FROM dreamTeam")
     List<DreamTeam> getAll();
 
-//    @Query("SELECT pokemon1,pokemon2,pokemon3,pokemon4,pokemon5,pokemon6 FROM dreamTeam where uId is :uId")
+    //    @Query("SELECT pokemon1,pokemon2,pokemon3,pokemon4,pokemon5,pokemon6 FROM dreamTeam where uId is :uId")
     @Query("SELECT * FROM dreamTeam where uId is :uId")
     List<DreamTeam> getAllPokemon(int uId);
 

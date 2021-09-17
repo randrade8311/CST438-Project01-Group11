@@ -6,16 +6,16 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "users")
 public class User {
-    @PrimaryKey(autoGenerate =  true)
+    @PrimaryKey(autoGenerate = true)
     private int uId;
 
     @ColumnInfo(name = "name")
     private String uName;
 
-    @ColumnInfo(name="username")
+    @ColumnInfo(name = "username")
     private String uUsername;
 
-    @ColumnInfo(name="password")
+    @ColumnInfo(name = "password")
     private String uPassword;
 
     public User(String uName, String uUsername, String uPassword) {
