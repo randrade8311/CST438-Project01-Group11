@@ -3,6 +3,8 @@ Are you a pokémon lover like us? Have you asked yourself what are your all-time
 
 With our Pokémon based Android application, users will be able to login or sign up with an account, and access features like creating and viewing your dream team, as well as the old-fashioned Pokédex that allows you to search up any of your favorite Pokémon.
 
+![](ScreenRecord.gif)
+
 ## Built With
 <ul>
   <li>
