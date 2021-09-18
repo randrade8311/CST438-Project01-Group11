@@ -24,6 +24,9 @@ public class LoginInstrumentedTest {
     public void validUser() {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         db = PokedexDatabase.getInstance(appContext);
+        User user = new User("Aundre", "aj", "test");
+        db.user().addUser(user);
+
         String username = "aj";
         String password = "test";
 
@@ -34,6 +37,9 @@ public class LoginInstrumentedTest {
     public void wrongPassword() {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         db = PokedexDatabase.getInstance(appContext);
+        User user = new User("Aundre", "aj", "test");
+        db.user().addUser(user);
+
         String username = "aje";
         String password = "test";
 
@@ -44,6 +50,9 @@ public class LoginInstrumentedTest {
     public void wrongUsername() {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         db = PokedexDatabase.getInstance(appContext);
+        User user = new User("Aundre", "aj", "test");
+        db.user().addUser(user);
+
         String username = "aj";
         String password = "testssss";
 
