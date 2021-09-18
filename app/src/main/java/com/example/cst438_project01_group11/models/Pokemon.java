@@ -5,6 +5,8 @@ import androidx.room.PrimaryKey;
 
 import com.example.cst438_project01_group11.Database.PokedexDatabase;
 
+import java.util.Objects;
+
 @Entity(tableName = PokedexDatabase.POKEMON_TABLE)
 public class Pokemon {
 
@@ -14,8 +16,14 @@ public class Pokemon {
     private Integer id;
     private String name;
     private String type1;
-//    private String type2;
     private String url;
+
+    public Pokemon(String name, String type1, String url, int id) {
+        this.name = name;
+        this.type1 = type1;
+        this.url = url;
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -54,14 +62,6 @@ public class Pokemon {
         this.type1 = type1;
     }
 
-//    public String getType2() {
-//        return type2;
-//    }
-//
-//    public void setType2(String type2) {
-//        this.type2 = type2;
-//    }
-
     public String getUrl() {
         return url;
     }
@@ -83,5 +83,20 @@ public class Pokemon {
 
     private void getTypeFromUrl() {
         type1 = "normal";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pokemon pokemon = (Pokemon) o;
+        return name.equals(pokemon.name) &&
+                Objects.equals(type1, pokemon.type1) &&
+                Objects.equals(url, pokemon.url);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, type1, url);
     }
 }
