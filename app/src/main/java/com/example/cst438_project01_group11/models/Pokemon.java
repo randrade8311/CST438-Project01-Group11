@@ -1,68 +1,87 @@
 package com.example.cst438_project01_group11.models;
 
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.google.gson.annotations.SerializedName;
+import com.example.cst438_project01_group11.Database.PokedexDatabase;
 
-@Entity(tableName = "pokemon")
+@Entity(tableName = PokedexDatabase.POKEMON_TABLE)
 public class Pokemon {
+
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private int mPokemonId;
 
-    @SerializedName("name")
-    @ColumnInfo(name = "name")
+    private Integer id;
     private String name;
-
-    @ColumnInfo(name = "url")
+    private String type1;
+//    private String type2;
     private String url;
-
-    @ColumnInfo(name = "type")
-    private String type;
-
-    public Pokemon(String name, String url, String type){
-        this.name = name;
-        this.url = url;
-        this.type = type;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
     }
-    public void setName(String name){
+
+    public void setName(String name) {
         this.name = name;
     }
-    public String getUrl(){
+
+    public int getPokemonId() {
+        return mPokemonId;
+    }
+
+    public void setPokemonId(int mPokemonId) {
+        this.mPokemonId = mPokemonId;
+    }
+
+    public Integer getId() {
+        if (id == null) {
+            String text = "https://pokeapi.co/api/v2/pokemon/";
+            String s = url.substring(text.length(), url.length() - 1);
+            id = Integer.parseInt(s);
+        }
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getType1() {
+        return type1;
+    }
+
+    public void setType1(String type1) {
+        this.type1 = type1;
+    }
+
+//    public String getType2() {
+//        return type2;
+//    }
+//
+//    public void setType2(String type2) {
+//        this.type2 = type2;
+//    }
+
+    public String getUrl() {
         return url;
     }
-    public void setUrl(String url){
+
+    public void setUrl(String url) {
         this.url = url;
     }
 
-    public String getType() {
-        return type;
+    public String getImageUrl() {
+        if (id == null) {
+            getId();
+        }
+        return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + id + ".png";
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public String getHighResImage() {
+        return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + id + ".png";
     }
 
-    @Override
-    public String toString() {
-        return "Pokemon{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", url='" + url + '\'' +
-                ", type='" + type + '\'' +
-                '}';
+    private void getTypeFromUrl() {
+        type1 = "normal";
     }
 }

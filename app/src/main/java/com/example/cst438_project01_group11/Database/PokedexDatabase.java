@@ -1,19 +1,20 @@
-package com.example.cst438_project01_group11;
+package com.example.cst438_project01_group11.Database;
 
 import android.content.Context;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.example.cst438_project01_group11.DreamTeam;
+import com.example.cst438_project01_group11.User;
 import com.example.cst438_project01_group11.models.Pokemon;
 import com.example.cst438_project01_group11.models.PokemonRes;
 import com.example.cst438_project01_group11.models.PokemonSprites;
 import com.example.cst438_project01_group11.models.PokemonSpritesRes;
-import com.example.cst438_project01_group11.models.PokemonType;
 import com.example.cst438_project01_group11.models.PokemonTypeRes;
-import com.example.cst438_project01_group11.models.PokemonTypes;
 import com.example.cst438_project01_group11.pokiapi.PokiapiService;
 
 import java.util.List;
@@ -25,10 +26,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 @Database(entities = {DreamTeam.class, User.class, Pokemon.class}, version = 16, exportSchema = false)
 public abstract class PokedexDatabase extends RoomDatabase {
+    public static final String POKEMON_TABLE = "POKEMON_TABLE";
+
     private static PokedexDatabase sInstance;
+
     public abstract DreamTeamDao dreamTeam();
+
     public abstract UserDao user();
-    public abstract PokemonDao pokemon();
 
     List<Pokemon> pokemonList;
     private String type;
@@ -37,11 +41,13 @@ public abstract class PokedexDatabase extends RoomDatabase {
 
     private Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://pokeapi.co/api/v2/")
-               .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
             .build();
 
-    public static synchronized PokedexDatabase getInstance(Context context){
-        if (sInstance == null){
+    public abstract PokemonDao getPokemonDao();
+
+    public static synchronized PokedexDatabase getInstance(Context context) {
+        if (sInstance == null) {
             sInstance = Room
                     .databaseBuilder(context.getApplicationContext(),
                             PokedexDatabase.class,
@@ -61,10 +67,10 @@ public abstract class PokedexDatabase extends RoomDatabase {
     }
 
     public void addPokemon() {
-        if (pokemon().count() == 0){
+        if (getPokemonDao().count() == 0){
             getPokemon();
         }
-        pokemonList = pokemon().getAllPokemon();
+        pokemonList = getPokemonDao().getAllPokemons();
         for (int i = 0; i < pokemonList.size(); i++) {
             Log.i("TAG", pokemonList.get(i).toString());
         }
@@ -74,7 +80,7 @@ public abstract class PokedexDatabase extends RoomDatabase {
         pokemonList = pList;
         for (int i = 0; i < pokemonList.size(); i++) {
             pokemonList.get(i).setId(i+1);
-            pokemon().addPokemon(pokemonList.get(i));
+            getPokemonDao().addPokemon(pokemonList.get(i));
             getPokemonUrlImg(pokemonList.get(i).getName(), i+1);
             getPokemonType(pokemonList.get(i).getName(), i+1);
         }
@@ -86,15 +92,16 @@ public abstract class PokedexDatabase extends RoomDatabase {
 
         pokemonSpritesCall.enqueue(new retrofit2.Callback<PokemonSpritesRes>() {
             @Override
-            public void onResponse(Call<PokemonSpritesRes> call, Response<PokemonSpritesRes> response) {
+            public void onResponse(@NonNull Call<PokemonSpritesRes> call, @NonNull Response<PokemonSpritesRes> response) {
+                assert response.body() != null;
                 PokemonSprites pokemonSprites = response.body().getSprite();
-                pokemon = pokemon().getPokemon(id);
+                pokemon = getPokemonDao().getPokemon(id);
                 pokemon.setUrl(pokemonSprites.getUrl());
-                pokemon().update(pokemon);
+                getPokemonDao().update(pokemon);
             }
 
             @Override
-            public void onFailure(Call<PokemonSpritesRes> call, Throwable t) {
+            public void onFailure(@NonNull Call<PokemonSpritesRes> call, @NonNull Throwable t) {
                 Log.e("TAG", t.toString());
             }
         });
@@ -105,15 +112,16 @@ public abstract class PokedexDatabase extends RoomDatabase {
         Call<PokemonTypeRes> pokemonTypeResCall = service1.getPokemonType(name);
         pokemonTypeResCall.enqueue(new retrofit2.Callback<PokemonTypeRes>() {
             @Override
-            public void onResponse(Call<PokemonTypeRes> call, Response<PokemonTypeRes> response) {
+            public void onResponse(@NonNull Call<PokemonTypeRes> call, @NonNull Response<PokemonTypeRes> response) {
+                assert response.body() != null;
                 String pokemonType = response.body().getPokemonTypes().get(0).getPokemonType().getPokemonTypeName();
-                pokemon = pokemon().getPokemon(id);
-                pokemon.setType(pokemonType);
-                pokemon().update(pokemon);
+                pokemon = getPokemonDao().getPokemon(id);
+                pokemon.setType1(pokemonType);
+                getPokemonDao().update(pokemon);
             }
 
             @Override
-            public void onFailure(Call<PokemonTypeRes> call, Throwable t) {
+            public void onFailure(@NonNull Call<PokemonTypeRes> call, @NonNull Throwable t) {
                 Log.e("TAG", t.toString());
             }
         });
@@ -124,13 +132,14 @@ public abstract class PokedexDatabase extends RoomDatabase {
         Call<PokemonRes> pokemonSpritesResCall = service.obtainListPokemon(50, 0);
         pokemonSpritesResCall.enqueue(new retrofit2.Callback<PokemonRes>() {
             @Override
-            public void onResponse(Call<PokemonRes> call, Response<PokemonRes> response) {
+            public void onResponse(@NonNull Call<PokemonRes> call, @NonNull Response<PokemonRes> response) {
+                assert response.body() != null;
                 List<Pokemon> pokemonList = response.body().getResults();
                 savePokemonList(pokemonList);
             }
 
             @Override
-            public void onFailure(Call<PokemonRes> call, Throwable t) {
+            public void onFailure(@NonNull Call<PokemonRes> call, @NonNull Throwable t) {
 
             }
         });

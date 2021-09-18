@@ -1,4 +1,4 @@
-package com.example.cst438_project01_group11;
+package com.example.cst438_project01_group11.Database;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -12,16 +12,17 @@ import java.util.List;
 
 @Dao
 public interface PokemonDao {
+
     @Insert
     void addPokemon(Pokemon pokemon);
 
-    @Query("SELECT COUNT(*) FROM pokemon")
+    @Query("SELECT COUNT(*) FROM " + PokedexDatabase.POKEMON_TABLE)
     int count();
 
-    @Query("SELECT * FROM pokemon")
-    List<Pokemon> getAllPokemon();
+    @Query("SELECT * FROM " + PokedexDatabase.POKEMON_TABLE)
+    List<Pokemon> getAllPokemons();
 
-    @Query("SELECT * FROM pokemon WHERE id is :id")
+    @Query("SELECT * FROM " + PokedexDatabase.POKEMON_TABLE +" WHERE id is :id")
     Pokemon getPokemon(int id);
 
     @Update
@@ -30,6 +31,6 @@ public interface PokemonDao {
     @Delete
     void delete(Pokemon pokemon);
 
-    @Query("DELETE FROM pokemon")
-    public void nukeTable();
+    @Query("DELETE FROM " + PokedexDatabase.POKEMON_TABLE)
+    void nukeTable();
 }

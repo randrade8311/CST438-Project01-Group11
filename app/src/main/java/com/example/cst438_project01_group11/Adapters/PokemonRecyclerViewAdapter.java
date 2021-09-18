@@ -74,7 +74,7 @@ public class PokemonRecyclerViewAdapter extends RecyclerView.Adapter<PokemonRecy
     public void onBindViewHolder(@NonNull @NotNull PokemonRecyclerViewAdapter.PokemonViewHolder holder, int position) {
         Pokemon currentItem = mPokemonList.get(position);
         Glide.with(context)
-                .load(currentItem.getUrl())
+                .load(currentItem.getImageUrl())
                 .centerCrop()
                 .placeholder(R.drawable.pokeball_icon)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)

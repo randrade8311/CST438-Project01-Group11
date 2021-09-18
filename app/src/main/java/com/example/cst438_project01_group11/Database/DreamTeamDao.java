@@ -1,8 +1,10 @@
-package com.example.cst438_project01_group11;
+package com.example.cst438_project01_group11.Database;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+
+import com.example.cst438_project01_group11.DreamTeam;
 
 import java.util.List;
 
@@ -17,7 +19,7 @@ public interface DreamTeamDao {
     @Query("SELECT * FROM dreamTeam")
     List<DreamTeam> getAll();
 
-//    @Query("SELECT pokemon1,pokemon2,pokemon3,pokemon4,pokemon5,pokemon6 FROM dreamTeam where uId is :uId")
+    //    @Query("SELECT pokemon1,pokemon2,pokemon3,pokemon4,pokemon5,pokemon6 FROM dreamTeam where uId is :uId")
     @Query("SELECT * FROM dreamTeam where uId is :uId")
     List<DreamTeam> getAllPokemon(int uId);
 
@@ -38,4 +40,7 @@ public interface DreamTeamDao {
 
     @Query("UPDATE dreamTeam SET pokemon6 = :pokemon6 WHERE uId = :uId")
     int updatePoke6(String pokemon6, int uId);
+
+    @Query("SELECT * FROM dreamTeam where username = :username")
+    DreamTeam getDreamTeamByUsername(String username);
 }
