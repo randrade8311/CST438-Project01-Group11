@@ -24,6 +24,7 @@ public class SignUpInstrumentedTest {
     public void emptyField() {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         db = PokedexDatabase.getInstance(appContext);
+
         String username = "";
         String password = "test";
 
@@ -44,6 +45,9 @@ public class SignUpInstrumentedTest {
     public void usernameTaken() {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         db = PokedexDatabase.getInstance(appContext);
+        User user = new User("Aundre", "aj", "test");
+        db.user().addUser(user);
+
         String username = "aj";
         String password = "test";
 
