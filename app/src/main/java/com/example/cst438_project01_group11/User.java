@@ -4,6 +4,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Objects;
+
 @Entity(tableName = "users")
 public class User {
     @PrimaryKey(autoGenerate = true)
@@ -54,6 +56,21 @@ public class User {
 
     public void setUPassword(String cPassword) {
         this.uPassword = cPassword;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(uName, user.uName) &&
+                uUsername.equals(user.uUsername) &&
+                uPassword.equals(user.uPassword);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(uId, uName, uUsername, uPassword);
     }
 
     @Override

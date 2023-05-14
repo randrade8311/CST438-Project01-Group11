@@ -24,7 +24,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-@Database(entities = {DreamTeam.class, User.class, Pokemon.class}, version = 16, exportSchema = false)
+@Database(entities = {DreamTeam.class, User.class, Pokemon.class}, version = 17, exportSchema = false)
 public abstract class PokedexDatabase extends RoomDatabase {
     public static final String POKEMON_TABLE = "POKEMON_TABLE";
 
@@ -144,4 +144,8 @@ public abstract class PokedexDatabase extends RoomDatabase {
             }
         });
     }
+
+    public UserDao getUserDAO(){
+        return user();
+    };
 }

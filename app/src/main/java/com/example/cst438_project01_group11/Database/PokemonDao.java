@@ -25,6 +25,9 @@ public interface PokemonDao {
     @Query("SELECT * FROM " + PokedexDatabase.POKEMON_TABLE +" WHERE id is :id")
     Pokemon getPokemon(int id);
 
+    @Query("SELECT * FROM " + PokedexDatabase.POKEMON_TABLE + " WHERE name is :name")
+    Pokemon getPokemonByName(String name);
+
     @Update
     void update(Pokemon pokemon);
 
